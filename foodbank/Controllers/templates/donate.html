@@ -1,0 +1,136 @@
+<html>
+    <head>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+rel="stylesheet" id="bootstrap-css">
+        <script
+src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Oleo+Script:400,700"
+rel="stylesheet">
+           <link
+href="https://fonts.googleapis.com/css?family=Teko:400,700"
+rel="stylesheet">
+           <link
+href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+rel="stylesheet">
+
+        <style>
+        body{
+             background:url("/static/food.jpg");
+        }
+
+            .content-header{
+
+                font-size: 25px;
+             }
+            .section-content{
+                text-align: center;
+
+             }
+
+            .contact-section{
+                padding-top: 40px;
+            }
+            .contact-section .col-md-6{
+                width: 50%;
+            }
+            /* .form-line{
+                border-right: 1px solid #B29999;
+            } */
+            .form-group{
+                margin-top: 10px;
+            }
+            label{
+                font-size: 15px;
+
+
+            }
+            .form-control{
+                font-size: 1.3em;
+
+            }
+            textarea.form-control {
+                height: 135px;
+                /* margin-top: px;*/
+            }
+            .log-btn {
+                font-size: 1.1em;
+                float: right;
+                width: 150px;
+                background:#33d2ff;
+                color: #fff;
+                height:40px;
+                text-decoration:none;
+                border:none;
+                border-radius:4px;
+                -moz-border-radius:4px;
+                -webkit-border-radius:4px;
+            }
+
+
+        </style>
+    </head>
+    <body>
+      {% extends "hotel.html" %}
+      {% block content%}
+
+        <section id="contact" style = "height: 200px;width: 50%;">
+
+            <div class="contact-section">
+            <div class="container" >
+
+                <form role="form" action="/donate" onsubmit="return validateForm()" method="POST">
+
+                  <b><h2 style = "color:#33d2ff;">&nbsp;
+                    Add Food Details</h2></b>
+                    <div class="col-md-6">
+                          <div class="form-group">
+                              <label for ="description"> Descrption</label>
+
+                              <textarea class="form-control"
+type="textarea" id="message" name="des" placeholder="Description"
+maxlength="140" rows="7" required></textarea>
+                          </div>
+
+
+                    </div>
+                    <div class="col-md-6 form-line">
+                          <div class="form-group">
+                            <label for="exampleInputUsername">Number
+of People it can feed</label>
+                            <input type="text" class="form-control"
+pattern="[0-9]{1,4}" required title="Please enter a valid input"
+name="quant" placeholder="How many people it can feed">
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleInputEmail">Time Limit</label>
+
+                            <input type="text" class="form-control"
+pattern="[0-9]{1,2}" required title="Please enter a valid time"
+name="duration" placeholder="Timelimit(hours)" >
+                          </div>
+                          <div>
+
+                              <button type="submit" class="log-btn"
+onclick="myFunction()" >Donate</button>
+                          </div>
+
+                      </div>
+
+                </form>
+            </div>
+        </section>
+        <script>
+        function validateForm(){
+            if (confirm("Confirm Donation")) {
+                return true;
+            } else {
+                return false;
+            }
+          }
+        </script>
+    {% endblock %}
+    </body>
+
+
+</html>

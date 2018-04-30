@@ -1,0 +1,79 @@
+{% extends "ngo.html" %}
+{% block content %}
+{%if food %}
+<div class="container">
+  <b><h3 style = "color:#33d2ff;">Details of Food Donations</h3></b>
+  <table class="table table-striped table-bordered table-condensed table-responsive">
+     <thead>
+      <tr>
+        <th>Date</th>
+        <th>Time of expiry(Hours)</th>
+        <th>Donar Name</th>
+        <th>Location</th>
+        <th>Food Description</th>
+        <th>People it can feed</th>
+        <th>Book for People</th>
+        <th>Reach in Hours</th>
+        <th>status</th>
+      </tr>
+    </thead>
+{%for i in food%}
+<script>
+
+function validateForm(val){
+    console.log(val)
+    var x = parseInt(document.getElementById(val+'cquant').value);
+    var y = parseInt(document.getElementById(val+'cdur').value);
+    var p = parseInt(document.getElementById(val+'quant').value);
+    var q = parseInt(document.getElementById(val+'dur').value);
+    console.log(x,y,p,q)
+    if(p <= x && q <= y){
+        if (confirm("Confirm Booking")) {
+            return true;
+        } else {
+            return false;
+        }
+    }else if(p > x && q <= y){
+        alert("Booking must be less then number of people it can feed");
+        return false;
+    }else if(p <= x && q > y){
+        alert("Duration must be less than the Expiry time");
+        return false;
+    }else{
+        alert("Booking must be less then number of people it can feed\nDuration must be less than the Expiry time");
+        return false;
+    }
+}
+</script>
+<tbody>
+  <tr>
+  <td>{{i['created_timestamp']}}
+  <td>{{i['duration']}}</td>
+  <td>{{i['name']}}</td>
+  <td>{{i['location']}}</td>
+  <td>{{i['description']}}</td>
+  <td>{{i['quantity']}}</td>
+
+
+  <form action = "/lock" id = "{{i['foodid']}}" onsubmit="return validateForm(this.id)" method = "post" >
+    <div class="form-group">
+      <input type = "hidden" value = "{{i['foodid']}}" name = "foodid">
+      <input type = "hidden" id = "{{i['foodid']+'cquant'}}" value = "{{i['quantity']}}" name='cquant'>
+      <input type = "hidden" id = "{{i['foodid']+'cdur'}}" value = "{{i['duration']}}" name='cngodur'>
+      <td><input type="text" style="width:80px;" id = "{{i['foodid']+'quant'}}" class="form-control" name = "quant">
+      </td>
+      <td><input type="text" style="width:80px;" id = "{{i['foodid']+'dur'}}" class="form-control" name = "ngodur">
+      </td>
+      <td><button type="submit" id = "{{i['foodid']+'sub'}}" class="btn btn-primary">Lock</button>
+      </td></div>
+  </form>
+
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+{% else %}
+<center><h2 >Nothing to grab</h2></center>
+{%endif%}
+{% endblock %}

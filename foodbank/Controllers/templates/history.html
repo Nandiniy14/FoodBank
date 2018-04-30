@@ -1,0 +1,33 @@
+{% extends "hotel.html" %}
+{% block content %}
+{%if food %}
+<div class="container">
+<b><h3 style = "color:#33d2ff;">Details of Food Donations</h3></b>
+  <table class="table table-striped table-bordered table-responsive
+table-condensed">
+    <thead style="vertical-align:top">
+      <tr>
+        <th>Date</th>
+        <th>Name </th>
+        <th>Food Description</th>
+        <th>People it can feed</th>
+        <th>Time of expiry(Hours)</th>
+      </tr>
+    </thead>
+{%for i in food%}
+<tbody>
+  <tr>
+  <td>{{i['created_timestamp']}}
+  <td>{{i['name']}}</td>
+  <td>{{i['description']}}</td>
+  <td>{{i['foodquantity']}}</td>
+  <td>{{i['duration']}}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+{% else %}
+<center><h2 >No donations yet</h2></center>
+{%endif%}
+{% endblock %}

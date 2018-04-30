@@ -1,0 +1,50 @@
+{% extends "hotel.html" %}
+{% block content %}
+{%if food %}
+<div class="container">
+  <b><h3 style = "color:#33d2ff;">Booked Food Details</h3></b>
+  <table class="table table-striped table-responsive table-bordered table-condensed">
+    <thead style="vertical-align:top">
+      <tr>
+        <th>Date</th>
+        <th>Name </th>
+        <th>Food Description</th>
+        <th>Food locked</th>
+        <th>Reach in(HOURS)</th>
+        <th>Click Button if picked</th>
+      </tr>
+    </thead>
+{%for i in food%}
+<script>
+function validateForm(val){
+    if (confirm("Confirm Status")) {
+        return true;
+    } else {
+        return false;
+    }
+  }
+</script>
+
+<tbody>
+  <tr>
+  <td>{{i['created_timestamp']}}
+  <td>{{i['name']}}</td>
+  <td>{{i['description']}}</td>
+  <td>{{i['food_quantity']}}</td>
+  <td>{{i['timelimit']}}</td>
+  <td><form  action="/status" method="POST" onsubmit="return validateForm(this.id)">
+    <input type = "hidden" value = "{{i['lock_id']}}" name = "lock_id">
+    <button type="submit" class="btn btn-primary">click me</button>
+  </form>
+  </td>
+</tr>
+
+
+{% endfor %}
+</tbody>
+</table>
+</div>
+{% else %}
+<center><h2 >No one Grabed Food</h2></center>
+{%endif%}
+{% endblock %}

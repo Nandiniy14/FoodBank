@@ -1,0 +1,17 @@
+
+
+{% extends "hotel.html" %}
+{% block content %}
+
+
+<div class="jumbotron">
+<p> Date:{{i['created_timestamp']}}</p><br>
+ <p style="text-align:center; font-size:20px;">Description:{{i['description']}}</p> <br>
+<p style="text-align:center; font-size:20px;">Quantity:{{i['foodquantity']}}</p><br>
+<p style="text-align:center; font-size:20px;">Duration: {{i['duration']}} hrs</p><br>
+<h3> You Have successfully uploaded the details!!!</h3>
+</div>
+
+
+
+{% endblock %}
